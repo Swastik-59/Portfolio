@@ -21,7 +21,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 .github/
-
+README.md
 # Environment files
 .env
 .env.local
