@@ -1,0 +1,297 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 4%;
+    --foreground: 0 0% 95%;
+
+    --card: 240 10% 6%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 240 10% 6%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 180 70% 50%;
+    --primary-foreground: 240 10% 4%;
+
+    --secondary: 240 8% 12%;
+    --secondary-foreground: 0 0% 85%;
+
+    --muted: 240 8% 15%;
+    --muted-foreground: 0 0% 55%;
+
+    --accent: 180 70% 50%;
+    --accent-foreground: 240 10% 4%;
+    --accent-rgb: 56 232 225; /* #38E8E1 for rgba usage */
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 95%;
+
+    --border: 240 8% 15%;
+    --input: 240 8% 15%;
+    --ring: 180 70% 50%;
+
+    --radius: 0.5rem;
+
+    /* Custom Portfolio Tokens */
+    --glow-primary: 180 70% 50%;
+    --glow-secondary: 200 80% 60%;
+    --surface-elevated: 240 10% 8%;
+    --surface-overlay: 240 10% 10%;
+    --text-dim: 0 0% 45%;
+  }
+
+  .dark {
+    --background: 240 10% 4%;
+    --foreground: 0 0% 95%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: auto;
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-space-grotesk), 'Space Grotesk', sans-serif;
+    font-feature-settings: "ss01", "ss02", "cv01";
+    overflow-x: hidden;
+  }
+
+  /* Better selection styling */
+  ::selection {
+    background: hsl(180 70% 50% / 0.3);
+    color: white;
+  }
+}
+
+@layer utilities {
+  .font-script {
+    font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .font-mono {
+    font-family: var(--font-jetbrains), 'JetBrains Mono', monospace;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(180, 70%, 50%), hsl(200, 80%, 60%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-purple {
+    background: linear-gradient(135deg, hsl(270, 70%, 60%), hsl(300, 80%, 65%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 30px hsl(180 70% 50% / 0.3),
+      0 0 60px hsl(180 70% 50% / 0.15);
+  }
+
+  /* Subtle glow - reduced for editorial feel */
+  .glow-text {
+    text-shadow: 0 0 40px hsl(180 70% 50% / 0.15);
+  }
+
+  .section-panel {
+    @apply w-screen flex-shrink-0 relative overflow-hidden;
+    min-height: 100vh;
+    min-height: 100dvh;
+    /* Dynamic viewport height for mobile browsers */
+  }
+
+  /* Glass morphism effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Subtle grain texture overlay */
+  .grain-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.02;
+    z-index: 1000;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  .noise-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  .scroll-container {
+    display: flex;
+    width: fit-content;
+    height: 100vh;
+  }
+
+  /* Handwriting animation */
+  @keyframes write {
+    0% {
+      stroke-dashoffset: 1000;
+      opacity: 0;
+    }
+
+    10% {
+      opacity: 1;
+    }
+
+    100% {
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+  }
+
+  .handwriting-path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: write 3s ease-out forwards;
+  }
+
+  /* Floating animation */
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Pulse glow */
+  @keyframes pulse-glow {
+
+    0%,
+    100% {
+      opacity: 0.5;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  /* CSS-based orb animations for performance */
+  @keyframes orb-slow {
+
+    0%,
+    100% {
+      transform: scale(1) translateX(0);
+    }
+
+    50% {
+      transform: scale(1.1) translateX(20px);
+    }
+  }
+
+  @keyframes orb-slower {
+
+    0%,
+    100% {
+      transform: scale(1) translateX(0);
+    }
+
+    50% {
+      transform: scale(1.05) translateX(-15px);
+    }
+  }
+
+  .animate-orb-slow {
+    animation: orb-slow 20s ease-in-out infinite;
+  }
+
+  .animate-orb-slower {
+    animation: orb-slower 25s ease-in-out infinite;
+  }
+
+  /* Subtle pulse for hero underline */
+  @keyframes subtle-pulse {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  .animate-subtle-pulse {
+    animation: subtle-pulse 4s ease-in-out infinite;
+  }
+}
+
+/* Tech layer line */
+@keyframes draw-line {
+  from {
+    stroke-dashoffset: 100;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.tech-line {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+
+.tech-line-animate {
+  animation: draw-line 1s ease-out forwards;
+}
+
+/* Card hover depth */
+.project-card {
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.project-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 60px -15px hsl(180 70% 50% / 0.2),
+    0 0 40px hsl(180 70% 50% / 0.1);
+}
+
+/* Custom scrollbar (hidden for horizontal scroll) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
