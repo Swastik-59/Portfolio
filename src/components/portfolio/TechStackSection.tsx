@@ -124,7 +124,7 @@ const TechStackSection = () => {
         {/* Intro line */}
         <div className="mb-12 sm:mb-16 lg:mb-20">
           <p className="text-sm sm:text-base text-muted-foreground/60 max-w-2xl">
-            I'm best at wiring up AI models to real products—from data to model to UI.
+            I&apos;m best at wiring up AI models to real products—from data to model to UI.
           </p>
         </div>
 
