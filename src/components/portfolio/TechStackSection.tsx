@@ -3,40 +3,68 @@
 import { useRef, useState, useEffect } from "react";
 import { useScroll, useMotionValueEvent } from "framer-motion";
 
-// Three-tier classification: primary (core), secondary (familiar), tertiary (exposure)
+// Three-tier classification: primary (core), secondary (familiar)
 export const STACK = [
   {
     key: "languages",
     title: "Languages",
-    description: "Core programming languages across full-stack, systems, and ML.",
-    primary: ["TypeScript", "Python", "Java"],
-    secondary: ["JavaScript", "C++", "SQL", "Go","C", "Bash"],
-    tertiary: [],
+    description: "Core programming languages I use daily in production.",
+    primary: ["TypeScript", "Python", "JavaScript", "C", "C++"],
+    secondary: ["SQL", "Go", "Java", "Rust", "Bash"],
   },
   {
     key: "fullstack",
     title: "Full-Stack",
-    description: "Frameworks and runtimes for production web applications.",
-    primary: ["Next.js", "React", "Node.js", "PostgreSQL"],
-    secondary: ["Express", "FastAPI", "MongoDB", "Tailwind CSS","Electron", "Framer Motion", "Zustand"],
-    tertiary: [],
+    description: "Frameworks and tools I reach for when building web apps.",
+    primary: ["Next.js", "React", "Node.js", "Express", "FastAPI", "MongoDB"],
+    secondary: ["PostgreSQL", "Tailwind CSS", "Electron", "Framer Motion", "Zustand", "Flutter"],
   },
   {
     key: "aiml",
     title: "AI / ML",
-    description: "Libraries and tooling for training, inference, and deployment.",
-    primary: ["PyTorch", "TensorFlow", "Transformers", "LangChain"],
-    secondary: ["Scikit-learn", "Keras", "XGBoost", "RAG Frameworks","Ollama", "Qdrant", "ONNX", "Whisper", "Sentence-Transformers"],
-    tertiary: [],
+    description: "Core frameworks and libraries I use for building, training, and deploying ML systems and workflows.",
+    primary: [
+      "PyTorch",
+      "TensorFlow",
+      "Scikit-learn",
+      "LangChain"
+    ],
+    secondary: [
+      "Transformers",
+      "Keras",
+      "XGBoost",
+      "RAG frameworks",
+      "Ollama",
+      "Qdrant",
+      "ONNX",
+      "Sentence-Transformers",
+      "Hugging Face"
+    ]
   },
   {
     key: "tools",
-    title: "Tools & Infra",
-    description: "Dev tooling, deployment, and infrastructure components.",
-    primary: ["Docker", "GitHub", "Linux", "Vercel"],
-    secondary: ["Redis", "Supabase", "GitHub Actions", "Render","Grafana", "Prometheus", "Qdrant", "Postman", "VS Code"],
-    tertiary: [],
-  },
+    title: "Tools & Infrastructure",
+    description: "Dev tooling and infrastructure I rely on for building routes to production.",
+    primary: [
+      "Docker",
+      "GitHub",
+      "Git",
+      "VS Code",
+      "Linux",
+      "Vercel"
+    ],
+    secondary: [
+      "Redis",
+      "Supabase",
+      "Firebase",
+      "GitHub Actions",
+      "Render",
+      "Grafana",
+      "Prometheus",
+      "Postman",
+    ]
+  }
+
 ];
 
 const TechStackSection = () => {
@@ -93,6 +121,13 @@ const TechStackSection = () => {
     <section className="py-16 sm:py-24 lg:py-32 relative" id="tech" aria-labelledby="tech-heading">
       <div ref={containerRef} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
+        {/* Intro line */}
+        <div className="mb-12 sm:mb-16 lg:mb-20">
+          <p className="text-sm sm:text-base text-muted-foreground/60 max-w-2xl">
+            I'm best at wiring up AI models to real products—from data to model to UI.
+          </p>
+        </div>
+
         {/* Desktop Layout */}
         <div className="hidden lg:flex lg:flex-row lg:gap-16 xl:gap-20">
 
@@ -126,9 +161,8 @@ const TechStackSection = () => {
                       key={idx}
                       role="listitem"
                       aria-current={idx === activeIndex ? "step" : undefined}
-                      className={`h-px transition-all duration-200 motion-reduce:transition-none ${
-                        idx === activeIndex ? "bg-zinc-400 w-5" : "bg-zinc-800 w-3"
-                      }`}
+                      className={`h-px transition-all duration-200 motion-reduce:transition-none ${idx === activeIndex ? "bg-zinc-400 w-5" : "bg-zinc-800 w-3"
+                        }`}
                     />
                   ))}
                 </div>
@@ -160,25 +194,28 @@ const TechStackSection = () => {
                 {/* Three-tier chip layout */}
                 <div className="space-y-3" role="list" aria-label={`${section.title} technologies`}>
                   {/* Primary tier - Core tools */}
-                  <div className="flex flex-wrap gap-x-2 gap-y-2">
-                    {section.primary.map((item) => (
-                      <Chip key={item} label={item} tier="primary" />
-                    ))}
-                  </div>
+                  {section.primary.length > 0 && (
+                    <div>
+                      <span className="text-[9px] tracking-[0.2em] uppercase text-zinc-600 block mb-2">Core</span>
+                      <div className="flex flex-wrap gap-x-2 gap-y-2">
+                        {section.primary.map((item) => (
+                          <Chip key={item} label={item} tier="primary" />
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
-                  {/* Secondary tier - Familiar */}
-                  <div className="flex flex-wrap gap-x-2 gap-y-2">
-                    {section.secondary.map((item) => (
-                      <Chip key={item} label={item} tier="secondary" />
-                    ))}
-                  </div>
-
-                  {/* Tertiary tier - Exposure */}
-                  <div className="flex flex-wrap gap-x-3 gap-y-1 pt-1">
-                    {section.tertiary.map((item) => (
-                      <Chip key={item} label={item} tier="tertiary" />
-                    ))}
-                  </div>
+                  {/* Secondary tier - Working knowledge */}
+                  {section.secondary.length > 0 && (
+                    <div>
+                      <span className="text-[9px] tracking-[0.2em] uppercase text-zinc-600 block mb-2">Working Knowledge</span>
+                      <div className="flex flex-wrap gap-x-2 gap-y-2">
+                        {section.secondary.map((item) => (
+                          <Chip key={item} label={item} tier="secondary" />
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -201,22 +238,27 @@ const TechStackSection = () => {
                   {section.description}
                 </p>
 
-                <div className="space-y-2" role="list">
-                  <div className="flex flex-wrap gap-2">
-                    {section.primary.map((item) => (
-                      <Chip key={item} label={item} tier="primary" />
-                    ))}
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {section.secondary.map((item) => (
-                      <Chip key={item} label={item} tier="secondary" />
-                    ))}
-                  </div>
-                  <div className="flex flex-wrap gap-x-3 gap-y-1 pt-1">
-                    {section.tertiary.map((item) => (
-                      <Chip key={item} label={item} tier="tertiary" />
-                    ))}
-                  </div>
+                <div className="space-y-3" role="list">
+                  {section.primary.length > 0 && (
+                    <div>
+                      <span className="text-[9px] tracking-[0.2em] uppercase text-zinc-600 block mb-2">Core</span>
+                      <div className="flex flex-wrap gap-2">
+                        {section.primary.map((item) => (
+                          <Chip key={item} label={item} tier="primary" />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {section.secondary.length > 0 && (
+                    <div>
+                      <span className="text-[9px] tracking-[0.2em] uppercase text-zinc-600 block mb-2">Working Knowledge</span>
+                      <div className="flex flex-wrap gap-2">
+                        {section.secondary.map((item) => (
+                          <Chip key={item} label={item} tier="secondary" />
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -228,27 +270,15 @@ const TechStackSection = () => {
 };
 
 // ============================================================================
-// CHIP COMPONENT - Three visual tiers
+// CHIP COMPONENT - Two visual tiers
 // ============================================================================
 
 interface ChipProps {
   label: string;
-  tier: 'primary' | 'secondary' | 'tertiary';
+  tier: 'primary' | 'secondary';
 }
 
 const Chip = ({ label, tier }: ChipProps) => {
-  if (tier === 'tertiary') {
-    // Plain text, no container
-    return (
-      <span
-        role="listitem"
-        className="text-sm text-zinc-500 motion-reduce:transition-none"
-      >
-        {label}
-      </span>
-    );
-  }
-
   if (tier === 'secondary') {
     // Lower prominence - dashed border
     return (
@@ -262,7 +292,7 @@ const Chip = ({ label, tier }: ChipProps) => {
           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/20 focus-visible:ring-offset-1 focus-visible:ring-offset-background
         "
         tabIndex={0}
-        aria-label={`${label}, familiar`}
+        aria-label={`${label}, working knowledge`}
       >
         {label}
       </span>

@@ -11,25 +11,18 @@ const AboutSection = () => {
       {/* Section divider - signals new chapter */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-16 sm:h-20 bg-gradient-to-b from-transparent via-muted-foreground/10 to-transparent" />
 
-      <div className="max-w-4xl text-center md:text-left space-y-4 sm:space-y-6">
+      <div className="max-w-6xl text-left md:text-left space-y-4 sm:space-y-6">
         {/* MAIN TEXT */}
         <ScrollReveal
           baseOpacity={0}
           enableBlur={true}
-          blurStrength={14}
-          baseRotation={4}
+          blurStrength={16}
+          baseRotation={1}
           rotationEnd="top center"
           wordAnimationEnd="center center"
         >
-          I build systems that work. Second-year engineering student focused on
-          AI systems, real-time ML pipelines, and production-grade full-stack
-          applications. I design, ship, and maintain software.
+          I’m Swastik Mukherjee, a Full Stack and AI developer who builds intelligent, real-world applications at the intersection of software engineering and machine learning. I specialize in creating scalable products that move from idea to deployment.
         </ScrollReveal>
-
-        <p className="text-sm text-muted-foreground/40 font-mono mt-6 sm:mt-8">
-          Good engineering is reducing complexity until only the necessary remains.
-        </p>
-
 
         {/* STATS */}
         <div className="mt-6 sm:mt-8 flex gap-4 sm:gap-6 md:gap-8 justify-center md:justify-start">

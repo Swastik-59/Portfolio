@@ -79,8 +79,20 @@ const ProjectPanel: React.FC<ProjectPanelProps> = ({ project, index, total }) =>
   return (
     <div
       ref={panelRef}
-      className="group relative min-h-[70vh] sm:min-h-[75vh] lg:min-h-[80vh] flex items-center py-12 sm:py-16 lg:py-24 xl:py-32"
+      className={`group relative min-h-[70vh] sm:min-h-[75vh] lg:min-h-[80vh] flex items-center py-12 sm:py-16 lg:py-24 xl:py-32 ${project.featured ? 'border-l-2 border-cyan-400/30' : ''}`}
     >
+      {/* Featured badge */}
+      {project.featured && (
+        <div className="absolute top-8 sm:top-12 left-4 sm:left-6 lg:left-12">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-400/10 border border-cyan-400/20">
+            <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+            <span className="text-[10px] sm:text-xs font-mono text-cyan-400 tracking-wider uppercase">
+              Featured
+            </span>
+          </div>
+        </div>
+      )}
+
       {/* Subtle hover indicator - left border */}
       <div className="absolute left-0 top-1/2 -translate-y-1/2 w-px h-0 bg-primary/40 transition-all duration-500 group-hover:h-32" />
       
@@ -116,7 +128,7 @@ const ProjectPanel: React.FC<ProjectPanelProps> = ({ project, index, total }) =>
               {project.name}
             </h3>
 
-            {/* Accent line + Position */}
+            {/* Accent line + Tagline */}
             <div className="gsap-reveal flex items-center gap-3 sm:gap-4 lg:gap-5">
               <div 
                 ref={lineRef}
@@ -124,25 +136,38 @@ const ProjectPanel: React.FC<ProjectPanelProps> = ({ project, index, total }) =>
                 style={{ transform: 'scaleX(0)' }}
               />
               <p className="text-sm sm:text-base lg:text-lg text-cyan-400/90 font-medium">
-                {project.position}
+                {project.tagline}
               </p>
             </div>
 
             {/* Description */}
-            <p className="gsap-reveal text-sm sm:text-base lg:text-lg text-white/50 leading-relaxed max-w-xl">
+            <p className="gsap-reveal text-sm sm:text-base lg:text-lg text-white/60 leading-relaxed max-w-xl">
               {project.description}
             </p>
 
-            {/* Tech Stack */}
-            <div className="gsap-reveal flex flex-wrap items-center gap-2 sm:gap-3 pt-1 sm:pt-2">
-              {project.tech.map((tech, i) => (
-                <span 
-                  key={tech}
-                  className="text-[10px] sm:text-xs font-mono text-white/40 tracking-wide"
-                >
-                  {tech}{i < project.tech.length - 1 && <span className="ml-2 sm:ml-3 text-white/20">·</span>}
-                </span>
+            {/* Highlights as bullet points */}
+            <ul className="gsap-reveal space-y-2 max-w-xl" role="list">
+              {project.highlights.map((highlight, i) => (
+                <li key={i} className="flex items-start gap-3 text-sm sm:text-base text-white/50 leading-relaxed">
+                  <span className="text-cyan-400/60 mt-1.5 flex-shrink-0" aria-hidden="true">•</span>
+                  <span>{highlight}</span>
+                </li>
               ))}
+            </ul>
+
+            {/* Tech Stack */}
+            <div className="gsap-reveal pt-2 sm:pt-3">
+              <span className="text-[10px] tracking-[0.15em] uppercase text-white/30 block mb-2">Tech</span>
+              <div className="flex flex-wrap items-center gap-2">
+                {project.tech.map((tech) => (
+                  <span 
+                    key={tech}
+                    className="text-[10px] sm:text-xs font-mono text-white/50 px-2 py-0.5 rounded bg-white/5 border border-white/10"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
 
             {/* Actions */}
@@ -151,13 +176,18 @@ const ProjectPanel: React.FC<ProjectPanelProps> = ({ project, index, total }) =>
                 href={project.repoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors duration-200"
+                aria-label={`View ${project.name} source code on GitHub`}
+                className="group inline-flex items-center gap-2 text-sm text-white/60 hover:text-white 
+                  transition-colors duration-200 px-3 py-1.5 rounded-md border border-white/10 
+                  hover:border-white/30 hover:bg-white/5 
+                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
-                <Github size={14} />
+                <Github size={16} aria-hidden="true" />
                 <span>Source</span>
                 <ArrowUpRight 
                   size={12} 
-                  className="opacity-0 group-hover:opacity-100 transition-opacity duration-200" 
+                  className="opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                  aria-hidden="true"
                 />
               </a>
 
@@ -166,13 +196,18 @@ const ProjectPanel: React.FC<ProjectPanelProps> = ({ project, index, total }) =>
                   href={project.demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 text-sm text-cyan-400/70 hover:text-cyan-400 transition-colors duration-200"
+                  aria-label={`View ${project.name} live demo`}
+                  className="group inline-flex items-center gap-2 text-sm text-cyan-400/80 hover:text-cyan-400 
+                    transition-colors duration-200 px-3 py-1.5 rounded-md border border-cyan-400/20 
+                    hover:border-cyan-400/50 hover:bg-cyan-400/5 
+                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
-                  <ExternalLink size={14} />
-                  <span>Demo</span>
+                  <ExternalLink size={16} aria-hidden="true" />
+                  <span>Live Demo</span>
                   <ArrowUpRight 
                     size={12} 
-                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-200" 
+                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                    aria-hidden="true"
                   />
                 </a>
               )}
@@ -254,6 +289,7 @@ const SectionHeader: React.FC = () => {
         <div className="overflow-hidden">
           <h2
             ref={titleRef}
+            id="projects-heading"
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold text-white tracking-tighter"
             style={{ transformStyle: 'preserve-3d' }}
           >
@@ -269,7 +305,7 @@ const SectionHeader: React.FC = () => {
           transition={{ delay: 0.3, duration: 0.7 }}
           className="mt-4 sm:mt-6 lg:mt-8 text-sm sm:text-base lg:text-lg xl:text-xl text-white/40 max-w-sm sm:max-w-md lg:max-w-xl"
         >
-          A selection of systems I&apos;ve architected and shipped.
+          Each built from scratch, shipped to real users, and maintained in production.
         </motion.p>
 
         {/* Project count indicator */}
@@ -318,7 +354,7 @@ const ProjectsSection: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="projects" className="relative">
+    <section ref={sectionRef} id="projects" className="relative" aria-labelledby="projects-heading">
       {/* Header */}
       <SectionHeader />
 
