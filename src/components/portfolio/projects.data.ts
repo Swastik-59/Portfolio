@@ -40,6 +40,21 @@ export const PROJECTS: Project[] = [
     featured: true,
   },
   {
+    id: 'facecheck-ai',
+    name: 'FaceCheck.AI',
+    tagline: 'CNN classifier for real vs. AI-generated faces',
+    description: 'Real vs synthetic face detector trained on 180,000+ images with high-confidence classification.',
+    highlights: [
+      'Custom CNN architecture trained on real vs. AI-generated face dataset',
+      'FastAPI backend serves TensorFlow/Keras inference with confidence breakdowns',
+      'Clear API boundaries between frontend and ML backend, containerized with Docker',
+    ],
+    tech: ['Next.js', 'FastAPI', 'TensorFlow', 'Keras', 'Docker', 'TypeScript'],
+    repoUrl: 'https://github.com/Swastik-59/FaceCheck.AI',
+    demoUrl: 'https://facecheck--ai.vercel.app/',
+    isDemo: true,
+  },
+  {
     id: 'real-time-fraud-detection',
     name: 'Real-Time Fraud Detection',
     tagline: 'Streaming fraud scoring pipeline with low-latency inference',
@@ -52,21 +67,6 @@ export const PROJECTS: Project[] = [
     tech: ['Java', 'Spring Boot', 'XGBoost', 'ONNX', 'ONNX Runtime', 'TypeScript', 'Next.js'],
     repoUrl: 'https://github.com/Swastik-59/Real-Time-Fraud-Detection',
     demoUrl: 'https://real-time-fraud-detection.vercel.app/',
-    isDemo: true,
-  },
-  {
-    id: 'facecheck-ai',
-    name: 'FaceCheck.AI',
-    tagline: 'CNN classifier for real vs. AI-generated faces',
-    description: 'Detects synthetic faces using a custom CNN trained on a large dataset.',
-    highlights: [
-      'Custom CNN architecture trained on real vs. AI-generated face dataset',
-      'FastAPI backend serves TensorFlow/Keras inference with confidence breakdowns',
-      'Clear API boundaries between frontend and ML backend, containerized with Docker',
-    ],
-    tech: ['Next.js', 'FastAPI', 'TensorFlow', 'Keras', 'Docker', 'TypeScript'],
-    repoUrl: 'https://github.com/Swastik-59/FaceCheck.AI',
-    demoUrl: 'https://facecheck--ai.vercel.app/',
     isDemo: true,
   },
   {

@@ -8,12 +8,12 @@ import HandwrittenName from './HandwrittenName';
 const HeroSection = () => {
   const [currentTime, setCurrentTime] = useState('');
   const { scrollY } = useScroll();
-  
+
   // First-scroll transition: gently de-emphasize hero
   const heroScale = useTransform(scrollY, [0, 400], [1, 0.97]);
   const heroOpacity = useTransform(scrollY, [0, 300], [1, 0.4]);
   const heroY = useTransform(scrollY, [0, 400], [0, -20]);
-  
+
   // Scroll indicator fades out
   const scrollLineHeight = useTransform(scrollY, [0, 100], [24, 48]);
   const scrollLineOpacity = useTransform(scrollY, [0, 150], [0.15, 0]);
@@ -41,7 +41,7 @@ const HeroSection = () => {
 
   return (
     <section className="section-panel flex items-center justify-center relative bg-transparent overflow-hidden" id="home">
-      
+
       {/* Animated gradient orbs background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <motion.div
@@ -80,7 +80,7 @@ const HeroSection = () => {
       >
         {/* Enhanced radial glow behind name */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <motion.div 
+          <motion.div
             className="w-[600px] h-[400px] sm:w-[800px] sm:h-[500px] bg-primary/[0.06] rounded-full blur-[140px]"
             animate={{
               scale: [1, 1.1, 1],
@@ -100,10 +100,10 @@ const HeroSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ 
-              duration: 1.2, 
+            transition={{
+              duration: 1.2,
               ease: [0.16, 1, 0.3, 1],
-              delay: 0.2 
+              delay: 0.2
             }}
             className="relative"
           >
@@ -113,16 +113,16 @@ const HeroSection = () => {
             </div>
             <HandwrittenName name="Swastik Mukherjee" />
           </motion.div>
-          
+
           {/* Sharp headline with gradient */}
           <motion.h1
             className="mt-8 sm:mt-10 md:mt-12 text-xl sm:text-2xl md:text-3xl font-semibold leading-tight tracking-tight bg-gradient-to-br from-foreground via-foreground/95 to-foreground/75 bg-clip-text text-transparent antialiased"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ 
-              delay: 0.9, 
-              duration: 0.8, 
-              ease: [0.22, 1, 0.36, 1] 
+            transition={{
+              delay: 0.9,
+              duration: 0.8,
+              ease: [0.22, 1, 0.36, 1]
             }}
           >
             AI Engineer & Full‑Stack Developer
@@ -133,15 +133,14 @@ const HeroSection = () => {
             className="mt-6 sm:mt-7 md:mt-8 text-sm sm:text-base md:text-lg text-muted-foreground/80 leading-[1.8] tracking-wide max-w-2xl mx-auto font-light antialiased"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ 
-              delay: 1.2, 
-              duration: 0.8, 
-              ease: [0.22, 1, 0.36, 1] 
+            transition={{
+              delay: 1.2,
+              duration: 0.8,
+              ease: [0.22, 1, 0.36, 1]
             }}
           >
             <p className="motion-reduce:transform-none">
-              Shipping AI‑powered web apps, multi‑agent systems, and ML pipelines.
-              I build end-to-end—from training models to deploying production backends.
+              Building production-grade intelligent systems, local ML pipelines, and data-driven applications with real deployments.
             </p>
           </motion.div>
 
@@ -150,10 +149,10 @@ const HeroSection = () => {
             className="mt-8 sm:mt-10 flex items-center justify-center gap-4"
             initial={{ opacity: 0, scaleX: 0 }}
             animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ 
-              delay: 1.5, 
-              duration: 0.8, 
-              ease: [0.22, 1, 0.36, 1] 
+            transition={{
+              delay: 1.5,
+              duration: 0.8,
+              ease: [0.22, 1, 0.36, 1]
             }}
             aria-hidden="true"
           >
@@ -224,9 +223,9 @@ const HeroSection = () => {
         </span>
         <motion.div
           className="w-px bg-gradient-to-b from-primary/30 via-muted-foreground/20 to-transparent origin-top"
-          style={{ 
+          style={{
             height: scrollLineHeight,
-            opacity: scrollLineOpacity 
+            opacity: scrollLineOpacity
           }}
           animate={{
             opacity: [0.2, 0.3, 0.2]
